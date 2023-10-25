@@ -23,7 +23,7 @@ user.post("/login", async (req, res, next) => {
         mail: rows[0].mail
     }, "debugkey");
 
-    return res.status(200).json({code: 200, message: token});
+    return res.status(200).json({code: 200, message: token, success: true});
 });
 
 user.use(auth);

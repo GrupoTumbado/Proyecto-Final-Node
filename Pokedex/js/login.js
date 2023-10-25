@@ -21,7 +21,7 @@ function login() {
 	}).then(function (res) {
 		console.log(res);
 
-		if (res.data.code === 200) {
+		if (res.data.code === 200 && res.data.success) {
 			localStorage.setItem("token", res.data.message);
 			window.location.href = 'pokedex.html';
 		} else {
