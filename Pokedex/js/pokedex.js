@@ -8,26 +8,26 @@ function init() {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
-        }
-        loadPokemon();
+        };
+        loadEmployees();
     } else {
         window.location.href = "index.html";
     }
 }
 
-function loadPokemon() {
-    axios.get(url + "/pokemon", headers).then(function (res) {
-        console.log(res);
-        displayPokemon(res.data.message);
-    }).catch(function (err) {
-        console.log(err);
-    });
+function loadEmployees() {
+    axios.get(url + "/pokemon", headers)
+        .then(function (res) {
+            displayEmployees(res.data.message);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
-function displayPokemon(pokemon) {
+function displayEmployees(employees) {
     var body = document.querySelector('body');
-    console.log(pokemon);
-    for (var i = 0; i < pokemon.length; i++) {
-        body.innerHTML += `<h1>${pokemon[i].pok_name}</h1>`;
+    for (var i = 0; i < employees.length; i++) {
+        body.innerHTML += `<h1>${employees[i].nombre}</h1>`;
     }
 }
