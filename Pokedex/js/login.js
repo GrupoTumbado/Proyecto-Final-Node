@@ -13,7 +13,7 @@ function login() {
 
 	axios({
 		method: 'post',
-		url: `${url}/user/sign_in`,
+		url: `${url}/user/login`,
 		data: {
 			user: user,
 			password: pass
