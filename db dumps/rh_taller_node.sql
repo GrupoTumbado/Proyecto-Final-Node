@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2023 at 03:54 AM
+-- Generation Time: Oct 25, 2023 at 04:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `rh_taller_node`
 --
+CREATE DATABASE IF NOT EXISTS `rh_taller_node` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `rh_taller_node`;
 
 -- --------------------------------------------------------
 
