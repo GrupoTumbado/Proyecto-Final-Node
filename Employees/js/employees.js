@@ -16,7 +16,7 @@ function init() {
 }
 
 function loadEmployees() {
-    axios.get(url + "/pokemon", headers)
+    axios.get(url + "/employees", headers)
         .then(function (res) {
             displayEmployees(res.data.message);
         })

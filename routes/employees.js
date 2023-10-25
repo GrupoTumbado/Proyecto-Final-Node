@@ -1,8 +1,8 @@
 const express = require('express');
-const employee = express.Router();
+const employees = express.Router();
 const db = require('../config/database');
 
-employee.post('/', async (req, res, next) => {
+employees.post('/', async (req, res, next) => {
     const {nombre, apellidos, telefono, mail, direccion} = req.body;
     if (nombre && apellidos && telefono && mail && direccion) {
         let query = "INSERT INTO empleados(nombre, apellidos, telefono, mail, direccion)";
@@ -17,7 +17,7 @@ employee.post('/', async (req, res, next) => {
     return res.status(500).json({code: 500, message: "Campos incompletos"});
 });
 
-employee.delete('/:id([0-9]{1,3})', async (req, res, next) => {
+employees.delete('/:id([0-9]{1,3})', async (req, res, next) => {
     const query = `DELETE
                    FROM empleados
                    WHERE id = ${req.params.id}`;
@@ -28,7 +28,7 @@ employee.delete('/:id([0-9]{1,3})', async (req, res, next) => {
     return res.status(404).json({code: 404, message: "Empleado no encontrado"});
 });
 
-employee.put('/:id([0-9]{1,3})', async (req, res, next) => {
+employees.put('/:id([0-9]{1,3})', async (req, res, next) => {
     const {nombre, apellidos, telefono, mail, direccion} = req.body;
 
     if (nombre && apellidos && telefono && mail && direccion) {
@@ -47,7 +47,7 @@ employee.put('/:id([0-9]{1,3})', async (req, res, next) => {
     return res.status(500).json({code: 500, message: "Campos incompletos"});
 });
 
-employee.patch('/:id([0-9]{1,3})', async (req, res, next) => {
+employees.patch('/:id([0-9]{1,3})', async (req, res, next) => {
     if (req.body.nombre) {
         let query = `UPDATE empleados
                      SET nombre='${req.body.nombre}'
@@ -62,12 +62,12 @@ employee.patch('/:id([0-9]{1,3})', async (req, res, next) => {
     return res.status(500).json({code: 500, message: "Campos incompletos"});
 });
 
-employee.get('/', async (req, res, next) => {
+employees.get('/', async (req, res, next) => {
     const employees = await db.query("SELECT * FROM empleados");
     return res.status(200).json({code: 1, message: employees});
 });
 
-employee.get('/:id([0-9]{1,3})', async (req, res, next) => {
+employees.get('/:id([0-9]{1,3})', async (req, res, next) => {
     const id = req.params.id;
     const employee = await db.query("SELECT * FROM empleados WHERE id=" + id + ";");
     if (employee.length > 0) {
@@ -76,7 +76,7 @@ employee.get('/:id([0-9]{1,3})', async (req, res, next) => {
     return res.status(404).send({code: 404, message: "Empleado no encontrado"});
 });
 
-employee.get('/:nombre([A-Za-z]+)', async (req, res, next) => {
+employees.get('/:nombre([A-Za-z]+)', async (req, res, next) => {
     const nombre = req.params.nombre;
     const employee = await db.query("SELECT * FROM empleados WHERE nombre='" + nombre + "';");
     if (employee.length > 0) {
@@ -85,4 +85,4 @@ employee.get('/:nombre([A-Za-z]+)', async (req, res, next) => {
     return res.status(404).send({code: 404, message: "Empleado no encontrado"});
 });
 
-module.exports = employee;
+module.exports = employees;

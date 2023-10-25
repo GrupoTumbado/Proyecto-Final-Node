@@ -23,7 +23,7 @@ function login() {
 
 		if (res.data.code === 200 && res.data.success) {
 			localStorage.setItem("token", res.data.message);
-			window.location.href = 'pokedex.html';
+			window.location.href = 'employees.html';
 		} else {
 			alert("Usuario y/o contraseña incorrectos");
 		}
