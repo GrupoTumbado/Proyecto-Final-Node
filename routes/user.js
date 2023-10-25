@@ -8,14 +8,14 @@ user.post("/login", async (req, res, next) => {
     const {user, password} = req.body;
 
     if (!(user && password)) {
-        return res.status(500).json({code: 500, message: "Campos incompletos"});
+        return res.status(400).json({code: 400, message: "Campos incompletos"});
     }
 
     const query = `SELECT * FROM usuarios WHERE (username = '${user}' OR mail = '${user}') AND password = '${password}'`;
     const rows = await db.query(query);
 
     if (rows.length !== 1) {
-        return res.status(500).json({code: 500, message: "Ocurrió un error"});
+        return res.status(200).json({code: 200, message: "Usuario y/o contraseña incorrectos"});
     }
 
     const token = jwt.sign({
