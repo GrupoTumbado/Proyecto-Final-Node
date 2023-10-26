@@ -6,7 +6,7 @@ employees.post('/', async (req, res, next) => {
     const {nombre, apellidos, telefono, mail, direccion} = req.body;
     if (nombre && apellidos && telefono && mail && direccion) {
         let query = "INSERT INTO empleados(nombre, apellidos, telefono, mail, direccion)";
-        query += ` VALUES('${nombre}', '${apellidos}', ${telefono}, '${mail}', '${direccion}')`;
+        query += ` VALUES('${nombre}', '${apellidos}', '${telefono}', '${mail}', '${direccion}')`;
         const rows = await db.query(query);
 
         if (rows.affectedRows == 1) {
@@ -35,7 +35,7 @@ employees.put('/:id([0-9]{1,3})', async (req, res, next) => {
         let query = `UPDATE empleados
                      SET nombre='${nombre}',
                          apellidos='${apellidos}',`;
-        query += `telefono=${telefono}, mail='${mail}', direccion='${direccion}' WHERE id=${req.params.id};`;
+        query += `telefono='${telefono}', mail='${mail}', direccion='${direccion}' WHERE id=${req.params.id};`;
 
         const rows = await db.query(query);
 
