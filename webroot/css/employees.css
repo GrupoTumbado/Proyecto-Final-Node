@@ -49,3 +49,11 @@ h1 {
 .employee:nth-child(odd) {
     background-color: #e0e0e0;
 }
+
+.hidden {
+    display: none;
+}
+
+.result {
+    max-width: 80px;
+}

@@ -1,6 +1,6 @@
 window.onload = init;
-let headers = {};
 const url = 'http://localhost:3000';
+let headers = {};
 
 function init() {
     if (localStorage.getItem("token")) {
