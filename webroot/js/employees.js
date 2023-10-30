@@ -18,6 +18,9 @@ function init() {
 
 	const btnAddEmployee = document.getElementById('btn-add-employee');
 	btnAddEmployee.addEventListener('click', addEmployee);
+
+	const btnSearchEmployee = document.getElementById('btn-search-employee');
+	btnSearchEmployee.addEventListener('click', searchEmployee);
 }
 
 function addEmployeeRow(employee) {
@@ -213,6 +216,21 @@ function updateEmployee(employeeId) {
 		} else {
 			alert("Error al actualizar empleado");
 		}
+	}).catch(function (err) {
+		console.log(err);
+	});
+}
+
+function searchEmployee() {
+	const searchInput = document.getElementById('input-search').value;
+
+	axios({
+		method: 'get',
+		url: `${url}/employees/${searchInput}`,
+		headers: headers,
+	}).then(function (res) {
+		console.log(res);
+		displayEmployees(res.data.message);
 	}).catch(function (err) {
 		console.log(err);
 	});

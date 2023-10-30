@@ -44,9 +44,9 @@ CREATE TABLE `empleados` (
 
 INSERT INTO `empleados` (`id`, `nombre`, `apellidos`, `telefono`, `mail`, `direccion`) VALUES
 (1, 'Empleado', 'Uno', '1111111111', 'empleado.uno@tallernode.com', 'Blah'),
-(2, 'Empleado', 'Dos', '2222222222', 'empleado.dos@tallernode.com', 'Bleh'),
-(3, 'Empleado', 'Tres', '3333333333', 'empleado.tres@tallernode.com', 'Blih'),
-(4, 'Empleado', 'Cuatro', '4444444444', 'empleado.cuatro@tallernode.com', 'Bloh'),
+(2, 'Empleado2', 'Dos', '2222222222', 'empleado.dos@tallernode.com', 'Bleh'),
+(3, 'Empleado3', 'Tres', '3333333333', 'empleado.tres@tallernode.com', 'Blih'),
+(4, 'Empleado4', 'Cuatro', '4444444444', 'empleado.cuatro@tallernode.com', 'Bloh'),
 (5, 'Empleado', 'Cinco', '5555555555', 'empleado.cinco@tallernode.com', 'Bluh');
 
 -- --------------------------------------------------------

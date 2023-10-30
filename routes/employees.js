@@ -76,13 +76,13 @@ employees.get('/:id([0-9]{1,3})', async (req, res, next) => {
     return res.status(404).send({code: 404, message: "Empleado no encontrado"});
 });
 
-employees.get('/:nombre([A-Za-z]+)', async (req, res, next) => {
+employees.get('/:nombre([A-Za-z0-9]+)', async (req, res, next) => {
     const nombre = req.params.nombre;
-    const employee = await db.query("SELECT * FROM empleados WHERE nombre='" + nombre + "';");
-    if (employee.length > 0) {
-        return res.status(200).json({code: 1, message: employee});
-    }
-    return res.status(404).send({code: 404, message: "Empleado no encontrado"});
+    const employees = await db.query("SELECT * FROM empleados WHERE nombre like '%" + nombre + "%';");
+    //if (employees.length > 0) {
+        return res.status(200).json({code: 1, message: employees});
+   //}
+   //return res.status(404).send({code: 404, message: "Empleado no encontrado"});
 });
 
 module.exports = employees;
