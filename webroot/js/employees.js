@@ -11,25 +11,13 @@ function init() {
 		window.location.href = "index.html";
 	}
 
-	// Eventos
-	/*const btnViewEmployees = document.getElementById('btn-view-employees');
-	btnViewEmployees.addEventListener('click', loadEmployees);
-
-	const btnNewEmployee = document.getElementById('btn-new-employee');
-	btnNewEmployee.addEventListener('click', newEmployee);
-
-	const btnAddEmployee = document.getElementById('btn-add-employee');
-	btnAddEmployee.addEventListener('click', addEmployee);
-
-	const btnDeleteEmployee = document.getElementById('btn-delete-employee');
-	btnDeleteEmployee.addEventListener('click', deleteEmployee);
-
-	const btnUpdateEmployee = document.getElementById('btn-update-employee');
-	btnUpdateEmployee.addEventListener('click', updateEmployee);*/
 	const btnNewEmployee = document.getElementById('btn-new-employee');
 	btnNewEmployee.addEventListener('click', newEmployeeToggle);
 
 	loadEmployees();
+
+	const btnAddEmployee = document.getElementById('btn-add-employee');
+	btnAddEmployee.addEventListener('click', addEmployee);
 }
 
 function addEmployeeRow(employee) {
@@ -71,7 +59,7 @@ function enableSaveButton() {
 }
 
 function saveUpdate() {
-	console.log('Saved!')
+	updateEmployee( $(this).data('employeeid'));
 	const employeeId = $(this).data('employeeid');
 	var saveBtn = $(`#save-${employeeId}`)
 	var row = $(`.test-row-${employeeId}`)
@@ -117,7 +105,6 @@ function cancelDeletion() {
 
 function confirmDeletion() {
 	const employeeId = $(this).data('employeeid');
-	const row = $(`.test-row-${employeeId}`)
 
 	axios({
 		method: 'delete',
@@ -151,7 +138,7 @@ function loadEmployees() {
 
 function displayEmployees(employees) {
 	const employeesTable = document.getElementById('employees-table');
-	employeesTable.innerHTML = ''; // Limpia el contenido del elemento
+	employeesTable.innerHTML = '';
 	employees.forEach(employee => {
 		addEmployeeRow(employee)
 	});
@@ -168,9 +155,9 @@ function newEmployeeToggle() {
 
 function addEmployee() {
 	const name = document.getElementById('input-name').value;
-	const surname = document.getElementById('input-surname').value;
+	const lastName = document.getElementById('input-surname').value;
 	const phone = document.getElementById('input-phone').value;
-	const email = document.getElementById('input-email').value;
+	const mail = document.getElementById('input-mail').value;
 	const address = document.getElementById('input-address').value;
 
 	axios({
@@ -178,49 +165,49 @@ function addEmployee() {
 		url: `${url}/employees`,
 		data: {
 			nombre: name,
-			apellidos: surname,
+			apellidos: lastName,
 			telefono: phone,
-			mail: email,
+			mail: mail,
 			direccion: address
 		},
 		headers: headers,
 	}).then(function (res) {
 		console.log(res);
 
-		if (res.data.code === 200 && res.data.success) {
-			alert("Empleado agregado correctamente");
+		if (res.data.code === 200) {
+			alert("Empleado añadido correctamente");
 			loadEmployees();
 		} else {
-			alert("Error al agregar empleado");
+			alert("Error al añadir empleado");
 		}
 	}).catch(function (err) {
 		console.log(err);
 	});
 }
 
-function updateEmployee() {
-	const id = document.getElementById('input-id').value;
-	const name = document.getElementById('input-name').value;
-	const lastName = document.getElementById('input-last-name').value;
-	const phone = document.getElementById('input-phone').value;
-	const email = document.getElementById('input-email').value;
-	const address = document.getElementById('input-address').value;
+
+function updateEmployee(employeeId) {
+	const name = $(`#name-${employeeId}`).find('div').text();
+	const lastName = $(`#surname-${employeeId}`).find('div').text();
+	const phone = $(`#phone-${employeeId}`).find('div').text();
+	const mail = $(`#mail-${employeeId}`).find('div').text();
+	const address = $(`#address-${employeeId}`).find('div').text();
 
 	axios({
 		method: 'put',
-		url: `${url}/employees/${id}`,
+		url: `${url}/employees/${employeeId}`,
 		data: {
 			nombre: name,
 			apellidos: lastName,
 			telefono: phone,
-			mail: email,
+			mail: mail,
 			direccion: address
 		},
 		headers: headers,
 	}).then(function (res) {
 		console.log(res);
 
-		if (res.data.code === 200 && res.data.success) {
+		if (res.data.code === 200) {
 			alert("Empleado actualizado correctamente");
 			loadEmployees();
 		} else {
